@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_foreach.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 13:42:54 by odessein          #+#    #+#             */
-/*   Updated: 2022/02/16 10:49:22 by odessein         ###   ########.fr       */
+/*   Created: 2022/02/24 23:14:49 by odessein          #+#    #+#             */
+/*   Updated: 2022/02/24 23:31:25 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-int	ft_strncmp(char *s1, char *s2, unsigned int n)
+
+void	ft_foreach(int	*tab, int	length, void (*f)(int))
 {
-	unsigned int	i;
+	int i;
 
 	i = 0;
-	if (n < 1)
-		return (0);
-	while (s1[i] == s2[i] && (i + 1) < n && (s1[i] != '\0' || s2[i] != '\0'))
+	while (i < length)
 	{
+		(*f)(tab[i]);
 		i++;
 	}
-	return (s1[i] - s2[i]);
 }

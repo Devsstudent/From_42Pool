@@ -1,10 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */ /*                                                    +:+ +:+         +:+     */ /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/14 11:10:51 by odessein          #+#    #+#             */
-/*   Updated: 2022/02/14 11:25:01 by odessein         ###   ########.fr       */
+/*   Created: 2022/02/16 09:51:51 by odessein          #+#    #+#             */
+/*   Updated: 2022/02/17 12:40:49 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -14,67 +16,73 @@ int	ft_check_string(char *base, char to_find)
 	while (*base)
 	{
 		if (to_find == *base)
-			return 0;
+			return (0);
 		++base;
 	}
-	return 1;
+	return (1);
 }
 
 int	ft_length_base(char *base)
 {
-	char	*based;
 	int		size;
 
 	size = 0;
 	while (*base)
 	{
 		if (*base != '\0' && ft_check_string(base + 1, *base) == 0)
-			return 0;
-		if (*base == '+' || *base == '-' || *base < 33 || *base > 126)
+			return (0);
+		if (*base == '+' || *base == '-')
 			return (0);
 		++base;
 		++size;
 	}
-	return size;
+	return (size);
+}
+
+void	ft_is_neg(long *nb)
+{
+	if (*nb < 0)
+	{
+		write(STDOUT_FILENO, "-", 1);
+		*nb *= (long) -1;
+	}
+}
+
+int	ft_recursive_power(long nb, long power)
+{
+	if (power < 0)
+		return (0);
+	else if (power < 1)
+		return (1);
+	else if (power < 2)
+		return (nb * power);
+	return (nb * ft_recursive_power(nb, power - 1));
 }
 
 void	ft_putnbr_base(int nbr, char *base)
 {
-	int	base_base;
-	int	base_to_base;
+	long	size_base;
+	long	size_nbr;
+	long	buff;
+	long	to_print;
+	long	long_from_int;
 
-	base_base = ft_length_base(base);
-	if (nbr < 0)
+	long_from_int = (long) nbr;
+	ft_is_neg(&long_from_int);
+	buff = long_from_int;
+	size_base = ft_length_base(base);
+	size_nbr = 0;
+	while (buff > 9)
 	{
-		nbr = nbr * (-1);
-		write(STDOUT_FILENO, "-", 1);
+		buff /= size_base;
+		size_nbr++;
 	}
-	if (base_base <= 1)
-		return ;
-	if (nbr <= 0)
+	while (size_nbr >= 0)
 	{
-		return ;
+		buff = long_from_int / ft_recursive_power(size_base, size_nbr);
+		to_print = buff;
+		write(STDOUT_FILENO, base + to_print, 1);
+		long_from_int = long_from_int % ft_recursive_power(size_base, size_nbr);
+		size_nbr--;
 	}
-	base_to_base = nbr % base_base;
-	ft_putnbr_base(nbr / base_base, base);
-	write(STDOUT_FILENO, (base + base_to_base), 1); 
-}
-
-void	ft_putnbr_base(int nbr, char *base);
-
-int		main(void)
-{
-	ft_putnbr_base(42, "0123456789");
-	write(1, "\n2a:", 4);
-	ft_putnbr_base(42, "0123456789abcdef");
-	write(1, "\n-2a:", 5);
-	ft_putnbr_base(-42, "0123456789abcdef");
-	write(1, "\n:", 2);
-	ft_putnbr_base(42, "");
-	write(1, "\n:", 2);
-	ft_putnbr_base(42, "0");
-	write(1, "\n:", 2);
-	ft_putnbr_base(42, "+-0123456789abcdef");
-	write(1, "\n:", 2);
-	ft_putnbr_base(42, "\t0123456789abcdef");
 }

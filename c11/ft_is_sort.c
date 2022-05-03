@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_is_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 13:42:54 by odessein          #+#    #+#             */
-/*   Updated: 2022/02/16 10:49:22 by odessein         ###   ########.fr       */
+/*   Created: 2022/02/24 23:35:40 by odessein          #+#    #+#             */
+/*   Updated: 2022/02/24 23:46:09 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-int	ft_strncmp(char *s1, char *s2, unsigned int n)
+
+int	ft_is_sort(int *tab, int length, int (*f)(int, int))
 {
-	unsigned int	i;
+	int	i;
+	int	check;
 
 	i = 0;
-	if (n < 1)
-		return (0);
-	while (s1[i] == s2[i] && (i + 1) < n && (s1[i] != '\0' || s2[i] != '\0'))
+	check_asc = 1;
+	
+	while (i < length - 1)
 	{
+		if ((*f)(tab[i], tab[i+1]) == 0)
+		{
+			
+		}
 		i++;
 	}
-	return (s1[i] - s2[i]);
 }

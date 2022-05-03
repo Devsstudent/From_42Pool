@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   header_file.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 13:42:54 by odessein          #+#    #+#             */
-/*   Updated: 2022/02/16 10:49:22 by odessein         ###   ########.fr       */
+/*   Created: 2022/02/19 18:05:37 by odessein          #+#    #+#             */
+/*   Updated: 2022/02/19 18:05:51 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-int	ft_strncmp(char *s1, char *s2, unsigned int n)
-{
-	unsigned int	i;
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
-	i = 0;
-	if (n < 1)
-		return (0);
-	while (s1[i] == s2[i] && (i + 1) < n && (s1[i] != '\0' || s2[i] != '\0'))
-	{
-		i++;
-	}
-	return (s1[i] - s2[i]);
-}
+#define BUF_SIZE 4096
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+

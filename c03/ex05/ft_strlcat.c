@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 13:05:24 by odessein          #+#    #+#             */
-/*   Updated: 2022/02/15 10:49:17 by odessein         ###   ########.fr       */
+/*   Updated: 2022/02/16 10:46:54 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 int	ft_strlen(char *str)
@@ -41,7 +41,8 @@ unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 		}
 		brows++;
 	}
-	dest[brows] = '\0';
+	if (size > size_dest)
+		dest[brows] = '\0';
 	if (size_dest > size)
 		return (size_src + size);
 	return (size_src + size_dest);

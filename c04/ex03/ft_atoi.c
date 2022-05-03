@@ -6,10 +6,9 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:55:56 by odessein          #+#    #+#             */
-/*   Updated: 2022/02/11 00:37:02 by odessein         ###   ########.fr       */
+/*   Updated: 2022/02/17 12:35:29 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 int	ft_atoi(char *str)
 {
 	int	number;
@@ -19,7 +18,7 @@ int	ft_atoi(char *str)
 	number = 0;
 	check_num = 0;
 	neg_sign = 1;
-	while (*str == ' ' || *str < 32 || *str > 127)
+	while (*str == ' ' || (*str > 8 && *str < 14))
 		++str;
 	while (*str == '+' || *str == '-')
 	{
